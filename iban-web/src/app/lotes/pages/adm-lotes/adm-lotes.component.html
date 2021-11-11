@@ -1,0 +1,140 @@
+<mat-card class="main-card">
+    <div class="center">
+        <h1>Lotes de Pago</h1>
+    </div>
+    <mat-card>
+        <button class="boton" mat-stroked-button routerLink="../save">
+            <mat-icon>add</mat-icon>
+            Registrar Lote
+        </button>
+        <button mat-stroked-button (click)="limpiarFiltros()">
+            Limpiar filtros
+        </button>
+        <div class="filtros">
+            <mat-form-field appearance="standard">
+                <mat-label>Nro. Lote</mat-label>
+                <input type="number" matInput placeholder="Nro. Lote" name="nroLote" #nroLoteInput
+                    [(ngModel)]="lotePagoQuery.nroLote">
+            </mat-form-field>
+
+            <mat-form-field appearance="standard">
+                <mat-select placeholder="Banco" name="idBanco" [(ngModel)]="lotePagoQuery.idBanco"
+                    (selectionChange)="filtrarLotes()">
+                    <mat-option>Todo</mat-option>
+                    <mat-option *ngFor="let opcionBanco of opcionesBanco" [value]="opcionBanco.valor">
+                        {{opcionBanco.descripcion}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="standard">
+                <mat-select placeholder="Moneda" name="moneda" [(ngModel)]="lotePagoQuery.moneda"
+                    (selectionChange)="filtrarLotes()">
+                    <mat-option>Todo</mat-option>
+                    <mat-option *ngFor="let opcionMoneda of opcionesMoneda" [value]="opcionMoneda.valor">
+                        {{opcionMoneda.descripcion}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="standard">
+                <mat-select placeholder="Estado" name="estado" [(ngModel)]="lotePagoQuery.estado"
+                    (selectionChange)="filtrarLotes()">
+                    <mat-option>Todo</mat-option>
+                    <mat-option *ngFor="let opcionEstadoLotePago of opcionesEstadoLotePago"
+                        [value]="opcionEstadoLotePago.valor">
+                        {{opcionEstadoLotePago.descripcion}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>         
+
+            <mat-form-field appearance="standard">
+                <mat-label>Fecha Registro Desde</mat-label>
+                <input matInput type="date" name="fechaRegistroDesde" [(ngModel)]="lotePagoQuery.fechaRegistroDesde"
+                    (change)="filtrarLotes()">
+            </mat-form-field>
+
+            <mat-form-field appearance="standard">
+                <mat-label>Fecha Registro Hasta</mat-label>
+                <input matInput type="date" name="fechaRegistroHasta" [(ngModel)]="lotePagoQuery.fechaRegistroHasta"
+                    (change)="filtrarLotes()">
+            </mat-form-field>
+
+        </div>
+
+        <section>
+            <mat-spinner *ngIf="showSpinner"></mat-spinner>
+        </section>
+
+        <section class="lotes-section">
+            <table class="mat-elevation-z4" mat-table [dataSource]="dataSource">
+                <ng-container matColumnDef="nroLote">
+                    <th mat-header-cell *matHeaderCellDef>Nro. Lote</th>
+                    <td mat-cell *matCellDef="let lote">
+                        {{ lote.nroLote }}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="banco">
+                    <th mat-header-cell *matHeaderCellDef>Banco</th>
+                    <td mat-cell *matCellDef="let lote">
+                        {{ lote.banco }}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="moneda">
+                    <th mat-header-cell *matHeaderCellDef>Moneda</th>
+                    <td mat-cell *matCellDef="let lote">
+                        {{ lote.moneda}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="nroCuentaCargo">
+                    <th mat-header-cell *matHeaderCellDef>Nro. Cuenta <br> Cargo</th>
+                    <td mat-cell *matCellDef="let lote">
+                        {{ lote.nroCuentaCargo}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="nroRegistros">
+                    <th mat-header-cell *matHeaderCellDef>Nro. Registros</th>
+                    <td mat-cell *matCellDef="let lote">
+                        {{ lote.nroRegistros}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="montoTotal">
+                    <th mat-header-cell *matHeaderCellDef>Monto Total</th>
+                    <td mat-cell *matCellDef="let lote">
+                        {{ lote.montoTotal | number: '1.2-2'}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="estado">
+                    <th mat-header-cell *matHeaderCellDef>Estado</th>
+                    <td mat-cell *matCellDef="let lote">
+                        {{ lote.estado | titlecase}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="registradoPor">
+                    <th mat-header-cell *matHeaderCellDef>Registrado Por</th>
+                    <td mat-cell *matCellDef="let lote">
+                        {{ lote.registradoPor | codUsuario }}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="fechaHoraRegistro">
+                    <th mat-header-cell *matHeaderCellDef>Fecha Registro</th>
+                    <td mat-cell *matCellDef="let lote">
+                        {{ lote.fechaHoraRegistro | date:'dd/MM/yyyy'}}
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row (click)="showDetail(row)" *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+            <mat-paginator class="mat-elevation-z4" [pageSizeOptions]="[20]" showFirstLastButtons></mat-paginator>
+
+        </section>
+    </mat-card>
+</mat-card>

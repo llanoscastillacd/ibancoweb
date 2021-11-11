@@ -1,0 +1,18 @@
+<section>
+  <div class="center">
+    <h2>Anular Solicitud de Pago</h2>
+  </div>
+
+  <div class="container-informacion">
+    ¿Desea anular la Solicitud de Pago con Nro. Solicitud <strong>{{ data.nroSolicitud }}</strong>?
+  </div>
+
+  <div class="container-botones">
+    <button class="boton" mat-stroked-button (click)="confirmar()">
+      Confirmar
+  </button>
+  <button class="boton" mat-stroked-button (click)="cancelar()">
+      Cancelar
+  </button>
+  </div>
+</section>

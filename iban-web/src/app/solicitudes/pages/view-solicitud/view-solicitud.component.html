@@ -1,0 +1,170 @@
+<mat-card class="main-card">
+    <button style="margin-top: 10px;" mat-stroked-button routerLink="../adm">
+        <mat-icon style="font-size: 20px;">arrow_back</mat-icon>Regresar
+    </button>
+    <button *ngIf="solicitudPago?.estado == 'SOLICITADO'" class="boton" mat-stroked-button (click)="anularSolicitudPago()">
+        <mat-icon style="font-size: 20px;">close</mat-icon>Anular
+    </button>
+    <section>
+        <mat-spinner *ngIf="showSpinner"></mat-spinner>
+    </section>
+    <br>
+    <mat-card class="container">
+        <div class="informacion">
+            <div class="mat-body-1">Nro. Solicitud</div>
+            <div class="mat-h3">{{ solicitudPago?.nroSolicitud }}</div>
+        </div>
+        <div class="informacion">
+            <div class="mat-body-1">Estado: </div>
+            <div class="mat-h3">{{ solicitudPago?.estado! | underScoreToSpace | titlecase}}</div>
+        </div>
+        <div class="informacion">
+            <div class="mat-body-1">Proceso Origen: </div>
+            <div class="mat-h3">{{ solicitudPago?.procesoOrigen | titlecase}}</div>
+        </div>
+        <div *ngIf="solicitudPago?.banco == tipoBancos.SCO" class="informacion">
+            <div class="mat-body-1">Nro. Referencia: </div>
+            <div class="mat-h3">{{ solicitudPago?.nroReferencia | replaceNull}}</div>
+        </div>
+        <div class="informacion">
+            <div class="mat-body-1">Solicitado Por: </div>
+            <div class="mat-h3">{{ solicitudPago?.solicitadoPor! | codUsuario}}</div>
+        </div>
+        <div class="informacion">
+            <div class="mat-body-1">Fecha Hora Solicitud: </div>
+            <div class="mat-h3">{{ solicitudPago?.fechaHoraSolicitud | date:'dd/MM/yyyy HH:mm a'}}</div>
+        </div>
+    </mat-card>
+    <br>
+
+    <mat-card class="container">
+        <div class="informacion">
+            <div class="mat-body-1">Banco: </div>
+            <div class="mat-h3">{{ solicitudPago?.banco }}</div>
+        </div>
+        <div class="informacion">
+            <div class="mat-body-1">Monto:</div>
+            <div class="mat-h3">{{ solicitudPago?.moneda | moneda}} {{ solicitudPago?.monto | number: '1.2-2' }}
+            </div>
+        </div>
+        <div class="informacion">
+            <div class="mat-body-1">{{ solicitudPago?.tipoCuenta }}</div>
+            <div class="mat-h3">{{ solicitudPago?.nroCuenta }}</div>
+        </div>
+        <div class="informacion">
+            <div class="mat-body-1">Tipo Abono:</div>
+            <div class="mat-h3">{{ solicitudPago?.tipoAbono }}</div>
+        </div>
+        <div *ngIf="solicitudPago?.banco == tipoBancos.BCP" class="informacion">
+            <div class="mat-body-1">Validación ID Beneficiario:</div>
+            <div class="mat-h3">{{ solicitudPago?.validacionIdBeneficiario }}</div>
+        </div>
+    </mat-card>
+    <br>
+
+    <mat-card class="container">
+        <div class="informacion">
+            <div class="mat-body-1">{{ solicitudPago?.tipoDocumentoIdentidad }}:</div>
+            <div class="mat-h3"> {{ solicitudPago?.nroDocumentoIdentidad }}</div>
+        </div>
+        <div class="informacion">
+            <div class="mat-body-1">Nombre del Beneficiario:</div>
+            <div class="mat-h3">{{ solicitudPago?.nombreBeneficiario | titlecase}} </div>
+        </div>
+        <div *ngIf="solicitudPago?.banco != tipoBancos.BCP" class="informacion">
+            <div class="mat-body-1">Correo Electrónico:</div>
+            <div class="mat-h3">{{ solicitudPago?.correoElectronico | replaceNull}} </div>
+        </div>
+        <div *ngIf="solicitudPago?.banco == tipoBancos.IBK" class="informacion">
+            <div class="mat-body-1">Nro. Celular:</div>
+            <div class="mat-h3">{{ solicitudPago?.nroCelular | replaceNull}} </div>
+        </div>
+
+    </mat-card>
+    <br>
+
+    <div class="mat-h3">Lotes agregados</div>
+    <section class="documentos-section">
+        <table class="mat-elevation-z4" mat-table [dataSource]="dataSourceLotesPago">
+            <ng-container matColumnDef="nroLote">
+                <th mat-header-cell *matHeaderCellDef>Nro Lote</th>
+                <td mat-cell *matCellDef="let lotePago">
+                    {{ lotePago.nroLote }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="estado">
+                <th mat-header-cell *matHeaderCellDef>Estado</th>
+                <td mat-cell *matCellDef="let lotePago">
+                    {{ lotePago.estado | titlecase }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="resultadoProceso">
+                <th mat-header-cell *matHeaderCellDef>Resultado<br>del Proceso</th>
+                <td mat-cell *matCellDef="let lotePago">
+                    {{ lotePago.resultadoProceso | titlecase }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="referencia">
+                <th mat-header-cell *matHeaderCellDef>Referencia</th>
+                <td mat-cell *matCellDef="let lotePago">
+                    {{ lotePago.referencia | titlecase }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="registradoPor">
+                <th mat-header-cell *matHeaderCellDef>Registrado Por</th>
+                <td mat-cell *matCellDef="let lotePago">
+                    {{ lotePago.registradoPor | codUsuario }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="fechaHoraRegistro">
+                <th mat-header-cell *matHeaderCellDef>Fecha Hora Registro</th>
+                <td mat-cell *matCellDef="let lotePago">
+                    {{ lotePago.fechaHoraRegistro | date:'dd/MM/yyyy HH:mm a' }}
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedLotePagoColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedLotePagoColumns"></tr>
+        </table>
+    </section>
+    <br>
+
+    <div class="mat-h3">Documentos</div>
+    <section class="documentos-section">
+        <table class="mat-elevation-z4" mat-table [dataSource]="dataSourceDocumentos">
+            <ng-container matColumnDef="tipoDocumento">
+                <th mat-header-cell *matHeaderCellDef>Tipo Documento</th>
+                <td mat-cell *matCellDef="let documento">
+                    {{ documento.tipoDocumento }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="nroDocumento">
+                <th mat-header-cell *matHeaderCellDef>Nro. Documento</th>
+                <td mat-cell *matCellDef="let documento">
+                    {{ documento.nroDocumento }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="moneda">
+                <th mat-header-cell *matHeaderCellDef>Moneda</th>
+                <td mat-cell *matCellDef="let documento">
+                    {{ documento.moneda}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="monto">
+                <th mat-header-cell *matHeaderCellDef>Monto</th>
+                <td mat-cell *matCellDef="let documento">
+                    {{ documento.monto | number: '1.2-2'}}
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedDocumentoColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedDocumentoColumns"></tr>
+        </table>
+    </section>
+</mat-card>

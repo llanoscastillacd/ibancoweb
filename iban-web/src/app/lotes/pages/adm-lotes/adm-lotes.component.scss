@@ -1,0 +1,69 @@
+//Card principal
+.main-card {
+    margin: 32px auto;
+    max-width: 1300px;
+}
+
+.center {
+    text-align: center;
+}
+
+h1 {
+    font-weight: 500;
+}
+
+.mat-spinner {
+    margin: 0 auto;
+}
+
+.lotes-section {
+    overflow-x: scroll;
+}
+
+.mat-table,
+.mat-paginator {
+    width: 100%;
+    min-width: 900px;
+}
+
+tr.element-row:hover {
+    background: #d7d2d2;
+}
+
+tr:hover {
+    background: #d7d2d2;
+    cursor: pointer;
+}
+
+.mat-header-cell {
+    background-color: var(--data-color);
+}
+
+.mat-cell,
+.mat-header-cell {
+    padding: 6px 6px 6px 0;
+}
+
+th {
+    color: white;
+    font-size: 14px;
+}
+
+.filtros {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.mat-form-field {
+    padding-right: 20px;
+}
+
+.boton {
+    background-color: var(--data-color);
+    color: white;
+    margin-right: 10px;
+    margin-top: 10px;
+    .mat-icon {
+        color: white;
+    }
+}

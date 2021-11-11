@@ -1,0 +1,57 @@
+//Card principal
+.main-card {
+    margin: 32px auto;
+    max-width: 1200px;
+}
+
+.mat-spinner {
+    margin: 0 auto;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.informacion {
+    min-width: 150px;
+    padding-right: 20px;
+}
+
+.mat-body-1 {
+    color: var(--data-color);
+    font-size: 13px;
+}
+
+.documentos-section, .lotes-section {
+    overflow-x: scroll;
+}
+
+.mat-table {
+    width: 100%;
+    min-width: 480px;
+}
+
+.mat-header-cell {
+    background-color: var(--data-color);
+}
+
+.mat-cell,
+.mat-header-cell {
+    padding: 6px 6px 6px 0;
+}
+
+th {
+    color: white;
+    font-size: 14px;
+}
+
+.boton {
+    background-color: var(--data-color);
+    color: white;
+    margin-left: 10px;
+    margin-top: 10px;
+    .mat-icon {
+        color: white;
+    }
+}

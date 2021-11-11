@@ -1,0 +1,91 @@
+//Card principal
+.main-card {
+    margin: 32px auto;
+    max-width: 1300px;
+}
+
+.boton {
+    background-color: var(--data-color);
+    color: white;
+    margin-right: 10px;
+    margin-top: 10px;
+    .mat-icon {
+        color: white;
+    }
+}
+
+.boton:disabled {
+    opacity: 0.7;
+    color: white;
+}
+
+.datos-registrar-lote {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.mat-form-field {
+    padding-right: 20px;
+}
+
+.mat-spinner {
+    margin: 0 auto;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.informacion {
+    min-width: 150px;
+    padding-right: 20px;
+}
+
+.mat-body-1 {
+    color: var(--data-color);
+    font-size: 13px;
+}
+
+.solicitudes-section {
+    overflow-x: scroll;
+    overflow-y: scroll;
+    max-height: 550px;
+}
+
+.mat-table,
+.mat-paginator {
+    width: 100%;
+    min-width: 900px;
+}
+
+.mat-header-cell {
+    background-color: var(--data-color);
+}
+
+.mat-cell,
+.mat-header-cell {
+    padding: 6px 6px 6px 0;
+}
+
+th {
+    color: white;
+    font-size: 14px;
+}
+
+tr.mat-footer-row {
+    font-weight: bold;
+}
+
+.filtros {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.mat-form-field {
+    padding-right: 20px;
+}
+
+::ng-deep .mat-checkbox-checked .mat-checkbox-background {
+    background-color: var(--data-color) !important;
+}

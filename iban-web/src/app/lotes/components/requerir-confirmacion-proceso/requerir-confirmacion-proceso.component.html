@@ -1,0 +1,29 @@
+<section>
+    <div class="center">
+        <h2>Resultados del Proceso</h2>
+    </div>
+
+    <div class="container-informacion">
+        <div class="mat-body-1" style="font-weight: bold;">Nro. Registros totales: </div>
+        <div class="mat-body-1">{{data.nroRegistrosTotales}}</div>
+    </div>
+    <div class="container-informacion">
+        <div class="mat-body-1" style="font-weight: bold;">Procesado con éxito: </div>
+        <div class="mat-body-1">{{data.nroRegistrosProcesadosConExito}}</div>
+    </div>
+    <div class="container-informacion">
+        <div class="mat-body-1" style="font-weight: bold;">Procesado sin éxito: </div>
+        <div class="mat-body-1">{{data.nroRegistrosProcesadosSinExito}}</div>
+    </div>
+
+    <br>
+
+    <div class="container-botones">
+        <button class="boton" mat-stroked-button (click)="confirmar()">
+            Confirmar
+        </button>
+        <button class="boton" mat-stroked-button (click)="cancelar()">
+            Cancelar
+        </button>
+    </div>
+</section>
